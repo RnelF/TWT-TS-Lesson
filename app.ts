@@ -1,4 +1,8 @@
 class Student {
+  username: string;
+  age: number;
+  section: number | string;
+  course: string;
   constructor(
     username: string,
     age: number,
