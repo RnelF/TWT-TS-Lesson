@@ -1,5 +1,1 @@
-let result = null;
-
-result = "Hello";
-
-console.log(result);
+var arr: number[] = [1, 2, 3];

@@ -1,4 +1,2 @@
 "use strict";
-let result = null;
-result = "Hello";
-console.log(result);
+var arr = [1, 2, 3];
