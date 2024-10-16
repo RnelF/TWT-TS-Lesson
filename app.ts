@@ -1,21 +1,9 @@
-enum Size {
-  Smallest = 1,
-  Medium,
-  Large,
+let x: any = 1;
+
+let y: unknown = 1;
+
+if (typeof y == "number") {
+  const result = y + 1;
+} else if (typeof y == "string") {
+  const result = y.length;
 }
-
-var size: Size = Size.Smallest;
-
-if (size === Size.Smallest) {
-}
-
-//String Enums
-
-enum Direction {
-  Up = "UP",
-  Down = "DOWN",
-  Left = "LEFT",
-  Right = "RIGHT",
-}
-
-var value: Direction;
