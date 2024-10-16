@@ -1,9 +1,25 @@
 "use strict";
-let x = 1;
-let y = 1;
-if (typeof y == "number") {
-    const result = y + 1;
+function processFeedback(input) {
+    //assume we can perform any operation without explicit type checks
+    console.log(`Processing: ${input}`);
+    //further processing logic
 }
-else if (typeof y == "string") {
-    const result = y.length;
+//This can be a tring, number,file,etc
+processFeedback("Great service!");
+processFeedback(5);
+processFeedback(new Blob());
+function processingInfo(input) {
+    if (typeof input === "string") {
+        console.log(`Processing Text: ${input}`);
+    }
+    else if (typeof input === "number") {
+        console.log(`Processing Rating: ${input}`);
+    }
+    else if (input instanceof Blob) {
+        console.log(`Processing file`);
+    }
+    else {
+        console.log(`Unsupported type of Input`);
+    }
 }
+processingInfo(25);
