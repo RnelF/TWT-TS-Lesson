@@ -1,3 +1,5 @@
-function test(x: number): number {
-  return x + 1;
-}
+let result = null;
+
+result = "Hello";
+
+console.log(result);

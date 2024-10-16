@@ -1,4 +1,4 @@
 "use strict";
-function test(x) {
-    return x + 1;
-}
+let result = null;
+result = "Hello";
+console.log(result);
