@@ -1,18 +1,20 @@
 "use strict";
-function add(x, y) {
-    return x + y;
+function mul(x, y) {
+    return x * y;
 }
-const result = add(1, 2);
-console.log(result);
-function makeName(firstName, lastName, middleName) {
-    if (middleName)
-        return firstName + " " + middleName + " " + lastName;
-    return firstName + " " + lastName;
+function div(x, y) {
+    return x / y;
 }
-const fullName = makeName("Arnel", "Francia", "Yubal");
-console.log(fullName);
-///////////////////////////////
-function callFunc(func, param1, param2) {
-    func(param1, param2);
+function applyFunc(funcs, value) {
+    const results = [];
+    for (let i = 0; (i = funcs.length); i++) {
+        const args = value[i];
+        const result = funcs[i](args[0], args[1]);
+        results.push(result);
+    }
+    return results;
 }
-callFunc(makeName, "Arnel", "Francia");
+applyFunc([mul, div], [
+    [1, 2],
+    [4, 5],
+]);
