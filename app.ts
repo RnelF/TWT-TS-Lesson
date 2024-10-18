@@ -1,18 +1,25 @@
-interface Person {
-  name: string;
-  age: number;
-  height?: number;
+class Person {
+  private name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  greet() {
+    console.log(`Hello! my name is ${this.name}`);
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  setName(name: string) {
+    if (name.length < 5) return;
+
+    return (this.name = name);
+  }
 }
 
-interface Employee extends Person {
-  employeeId: number;
-}
+const p1 = new Person("Arnel");
 
-const worker: Employee = {
-  name: "Arnel",
-  age: 30,
-  height: 162,
-  employeeId: 1234,
-};
-
-console.log(worker);
+console.log(p1.setName("Tinay"));
