@@ -1,13 +1,21 @@
-function getItemLength(name: string): number;
-function getItemLength(names: string[]): number;
-function getItemLength(nameOrNames: unknown): number {
-  if (typeof nameOrNames === "string") {
-    return console.log(nameOrNames.length);
-  } else if (Array.isArray(nameOrNames)) {
-    return console.log(nameOrNames.length);
+function guessTheType(str: string): string;
+function guessTheType(num: number): string;
+function guessTheType(bool: boolean): string;
+function guessTheType(arrStr: string[]): string;
+function guessTheType(strOrNumOrBool: unknown): unknown {
+  if (typeof strOrNumOrBool === "string") {
+    return console.log(`The input is ${typeof strOrNumOrBool} type!`);
+  } else if (typeof strOrNumOrBool === "number") {
+    return console.log(`The input is ${typeof strOrNumOrBool} type!`);
+  } else if (typeof strOrNumOrBool === "boolean") {
+    return console.log(`The input is ${typeof strOrNumOrBool} type!`);
+  } else if (Array.isArray(strOrNumOrBool)) {
+    return console.log(
+      `The input is an Array of ${typeof strOrNumOrBool} type!`
+    );
   }
 
-  return 0; //if the input is invalid return 0
+  return console.log("Invalid Input!");
 }
 
-getItemLength("Arnel");
+guessTheType(23);

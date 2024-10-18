@@ -1,11 +1,17 @@
 "use strict";
-function getItemLength(nameOrNames) {
-    if (typeof nameOrNames === "string") {
-        return console.log(nameOrNames.length);
+function guessTheType(strOrNumOrBool) {
+    if (typeof strOrNumOrBool === "string") {
+        return console.log(`The input is ${typeof strOrNumOrBool} type!`);
     }
-    else if (Array.isArray(nameOrNames)) {
-        return console.log(nameOrNames.length);
+    else if (typeof strOrNumOrBool === "number") {
+        return console.log(`The input is ${typeof strOrNumOrBool} type!`);
     }
-    return 0; //if the input is invalid return 0
+    else if (typeof strOrNumOrBool === "boolean") {
+        return console.log(`The input is ${typeof strOrNumOrBool} type!`);
+    }
+    else if (Array.isArray(strOrNumOrBool)) {
+        return console.log(`The input is an Array of ${typeof strOrNumOrBool} type!`);
+    }
+    return console.log("Invalid Input!");
 }
-getItemLength("Arnel");
+guessTheType(23);
