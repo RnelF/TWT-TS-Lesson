@@ -1,6 +1,11 @@
 "use strict";
-function sum(...numbers) {
-    return console.log(numbers);
+function getItemLength(nameOrNames) {
+    if (typeof nameOrNames === "string") {
+        return console.log(nameOrNames.length);
+    }
+    else if (Array.isArray(nameOrNames)) {
+        return console.log(nameOrNames.length);
+    }
+    return 0; //if the input is invalid return 0
 }
-sum(1, 2, 3);
-sum();
+getItemLength("Arnel");
