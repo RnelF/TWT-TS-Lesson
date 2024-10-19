@@ -1,9 +1,30 @@
 "use strict";
-let playerActions;
 let monsterHP = 100;
 let playerHP = 100;
-const monsterDmg = 20;
-const playerDmg = 30;
+const monster = [
+    {
+        monsterName: "Rabituzah",
+        monsterLvl: 2,
+        monsterDmg: 20,
+        monsterAgi: 5,
+        monsterDef: 10,
+        monsterEvasion: 5,
+        monsterHP: 20,
+    },
+    {
+        monsterName: "Cobra",
+        monsterLvl: 3,
+        monsterDmg: 26,
+        monsterAgi: 7,
+        monsterDef: 14,
+        monsterEvasion: 10,
+        monsterHP: 25,
+    },
+];
+function monsterFighting() {
+    const randomNumber = Math.floor(Math.random() * monster.length);
+    return randomNumber;
+}
 const weaponShop = [
     {
         itemName: "Sword",
@@ -25,11 +46,25 @@ const weaponShop = [
     },
 ];
 const playerEquipment = [weaponShop[0]];
-function playerDamageCalculation(equipment) {
-    const playerWeapon = playerEquipment[0].weaponDmg;
+const playerDamage = playerEquipment[0].weaponDmg / 2;
+function playerDamagetoMonsterCalculation() {
+    const monsterHealth = randomMonster.monsterHP;
+    return monsterHealth - playerDamage;
 }
+let randomMonster = monster[monsterFighting()];
 function game(action) {
-    if (playerActions === "Attack") {
+    monsterFighting();
+    const monster = randomMonster.monsterName;
+    randomMonster.monsterHP = playerDamagetoMonsterCalculation();
+    if (action === "Attack") {
+        playerDamagetoMonsterCalculation();
+        return console.log(`you Attacked ${monster} and inflicted ${playerDamage}! the Current monster HP is ${randomMonster.monsterHP}`);
+    }
+    else if (action === "Run") {
+        return console.log("You Run");
+    }
+    else if (action === "Block") {
+        return console.log(`You will block the monster's next Attack`);
     }
 }
-console.log(playerEquipment[0].weaponDmg);
+game("Attack");
