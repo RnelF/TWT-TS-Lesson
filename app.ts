@@ -1,25 +1,35 @@
-class Person {
-  private name: string;
+let playerActions: "Attack" | "Block" | "Run";
+let monsterHP: number = 100;
+let playerHP: number = 100;
 
-  constructor(name: string) {
-    this.name = name;
+const monsterDmg: number = 20;
+const playerDmg: number = 30;
+
+const weaponShop: object[] = [
+  {
+    itemName: "Sword",
+    goldCost: 10,
+    weaponDmg: 15,
+    weaponDurability: 60
+  },
+  {
+    itemName: "Dagger",
+    goldCost: 15,
+    weaponDmg: 13,
+    weaponDurability: 70
+  },
+  {
+    itemName: "Katana",
+    goldCost: 20,
+    weaponDmg: 17,
+    weaponDurability: 80
   }
+]
 
-  greet() {
-    console.log(`Hello! my name is ${this.name}`);
-  }
+const playerEquipments: object[] = [weaponShop[0]]
 
-  getName() {
-    return this.name;
-  }
+const game = (action: string):string{
+  if (playerActions === "Attack"){
 
-  setName(name: string) {
-    if (name.length < 5) return;
-
-    return (this.name = name);
   }
 }
-
-const p1 = new Person("Arnel");
-
-console.log(p1.setName("Tinay"));

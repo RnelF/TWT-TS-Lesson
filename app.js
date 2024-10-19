@@ -1,19 +1,31 @@
 "use strict";
-class Person {
-    constructor(name) {
-        this.name = name;
+let playerActions;
+let monsterHP = 100;
+let playerHP = 100;
+const monsterDmg = 20;
+const playerDmg = 30;
+const weaponShop = [
+    {
+        itemName: "Sword",
+        goldCost: 10,
+        weaponDmg: 15,
+        weaponDurability: 60
+    },
+    {
+        itemName: "Dagger",
+        goldCost: 15,
+        weaponDmg: 13,
+        weaponDurability: 70
+    },
+    {
+        itemName: "Katana",
+        goldCost: 20,
+        weaponDmg: 17,
+        weaponDurability: 80
     }
-    greet() {
-        console.log(`Hello! my name is ${this.name}`);
+];
+const playerEquipments = [weaponShop[0]];
+const game = (action) => {
+    if (playerActions === "Attack") {
     }
-    getName() {
-        return this.name;
-    }
-    setName(name) {
-        if (name.length < 5)
-            return;
-        return (this.name = name);
-    }
-}
-const p1 = new Person("Arnel");
-console.log(p1.setName("Tinay"));
+};
