@@ -1,20 +1,18 @@
-class Person {
-  protected name: string;
-  constructor(name: string) {
-    this.name = name;
-  }
+abstract class Animal {
+  abstract makeSound(duration: number): void;
 
-  greet() {
-    console.log(`Hello!, My Name is ${this.name}`);
+  move(duration: number) {
+    console.log("Moving along...");
+    this.makeSound(duration);
   }
 }
 
-class Employee extends Person {
-  callMe() {
-    console.log(`Hello ${this.name}`);
+class Dog extends Animal {
+  makeSound(duration: number): void {
+    console.log("Woof Woof");
   }
 }
 
-const p1 = new Employee("Arnel");
+const dog = new Dog();
 
-p1.callMe();
+dog.move(10);

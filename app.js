@@ -1,16 +1,14 @@
 "use strict";
-class Person {
-    constructor(name) {
-        this.name = name;
-    }
-    greet() {
-        console.log(`Hello!, My Name is ${this.name}`);
+class Animal {
+    move(duration) {
+        console.log("Moving along...");
+        this.makeSound(duration);
     }
 }
-class Employee extends Person {
-    callMe() {
-        console.log(`Hello ${this.name}`);
+class Dog extends Animal {
+    makeSound(duration) {
+        console.log("Woof Woof");
     }
 }
-const p1 = new Employee("Arnel");
-p1.callMe();
+const dog = new Dog();
+dog.move(10);
