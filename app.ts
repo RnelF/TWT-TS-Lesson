@@ -1,60 +1,36 @@
-enum animalActions {
-  "Run" = "Runs",
-  "Jump" = "Jumps",
-  "Lay" = "Layed Down",
+interface Animal {
+  speak(): void;
 }
 
-abstract class Animal {
-  abstract makeSound(duration: number): void;
-  abstract makeAnotherSound(duration: number): void;
-  abstract doAnAction(act: animalActions): void;
+class Dog implements Animal {
+  private name: string;
+  private color: string;
 
-  move(duration: number, act: animalActions) {
-    console.log("Moving along...");
-    this.makeSound(duration);
-    this.makeAnotherSound(duration);
-    this.doAnAction(act);
+  constructor(name: string, color: string) {
+    this.name = name;
+    this.color = color;
   }
-}
+  speak() {
+    console.log(`I am ${this.name} and I am ${this.color}`);
+  }
 
-class Dog extends Animal {
-  makeSound(duration: number): void {
-    console.log("Woof Woof");
-  }
-  makeAnotherSound(duration: number): void {
-    console.log("Grrrrrrrrr");
-  }
-  doAnAction(act: animalActions): void {
-    if (act === animalActions.Jump) {
-      console.log(`The Dog ${act}`);
-    } else if (act === animalActions.Run) {
-      console.log(`The Dog ${act}`);
-    } else if (act === animalActions.Lay) {
-      console.log(`The Dog ${act}`);
-    }
+  test() {
+    return 1;
   }
 }
 
-class Cow extends Animal {
-  makeSound(duration: number): void {
-    console.log("Moo Moo");
-  }
-
-  makeAnotherSound(duration: number): void {
-    console.log("Thud Thud");
-  }
-  doAnAction(act: animalActions): void {
-    if (act === animalActions.Jump) {
-      console.log(`The Cow ${act}`);
-    } else if (act === animalActions.Run) {
-      console.log(`The Cow ${act}`);
-    } else if (act === animalActions.Lay) {
-      console.log(`The Cow ${act}`);
-    }
+class Cat implements Animal {
+  speak() {
+    console.log("Meow");
   }
 }
 
-const dog = new Dog();
-const cow = new Cow();
+const dog = new Dog("Blacky", "Black");
+const cat = new Cat();
+const animals: Animal[] = [dog, cat];
 
-cow.move(10, animalActions.Jump);
+function makeSound(animal: Animal) {
+  animal.speak();
+}
+
+makeSound(cat);
