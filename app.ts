@@ -1,36 +1,20 @@
-interface Animal {
-  speak(): void;
-}
+class Dog {
+  static instanceCount: number = 0;
+  name: string;
 
-class Dog implements Animal {
-  private name: string;
-  private color: string;
-
-  constructor(name: string, color: string) {
+  constructor(name: string) {
+    Dog.instanceCount++;
     this.name = name;
-    this.color = color;
-  }
-  speak() {
-    console.log(`I am ${this.name} and I am ${this.color}`);
   }
 
-  test() {
-    return 1;
+  static decreaseCount() {
+    this.instanceCount--;
   }
 }
 
-class Cat implements Animal {
-  speak() {
-    console.log("Meow");
-  }
-}
-
-const dog = new Dog("Blacky", "Black");
-const cat = new Cat();
-const animals: Animal[] = [dog, cat];
-
-function makeSound(animal: Animal) {
-  animal.speak();
-}
-
-makeSound(cat);
+const dog1 = new Dog("Browny");
+console.log(Dog.instanceCount);
+const dog2 = new Dog("Blacky");
+console.log(Dog.instanceCount);
+Dog.decreaseCount();
+console.log(Dog.instanceCount);

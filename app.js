@@ -1,25 +1,17 @@
 "use strict";
 class Dog {
-    constructor(name, color) {
+    constructor(name) {
+        Dog.instanceCount++;
         this.name = name;
-        this.color = color;
     }
-    speak() {
-        console.log(`I am ${this.name} and I am ${this.color}`);
-    }
-    test() {
-        return 1;
+    static decreaseCount() {
+        this.instanceCount--;
     }
 }
-class Cat {
-    speak() {
-        console.log("Meow");
-    }
-}
-const dog = new Dog("Blacky", "Black");
-const cat = new Cat();
-const animals = [dog, cat];
-function makeSound(animal) {
-    animal.speak();
-}
-makeSound(cat);
+Dog.instanceCount = 0;
+const dog1 = new Dog("Browny");
+console.log(Dog.instanceCount);
+const dog2 = new Dog("Blacky");
+console.log(Dog.instanceCount);
+Dog.decreaseCount();
+console.log(Dog.instanceCount);
