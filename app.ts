@@ -1,11 +1,11 @@
-class DataStore {
-  private items: number[] = [];
+class DataStore<T> {
+  private items: T[] = [];
 
-  addItem(item: number): void {
+  addItem(item: T): void {
     this.items.push(item);
   }
 
-  getItem(index: number): number {
+  getItem(index: number): T {
     return this.items[index];
   }
 
@@ -13,7 +13,7 @@ class DataStore {
     this.items.splice(index, 1);
   }
 
-  getAllItems(): number[] {
+  getAllItems(): T[] {
     return this.items;
   }
 }
