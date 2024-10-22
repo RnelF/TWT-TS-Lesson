@@ -1,18 +1,18 @@
 "use strict";
-class DataStore {
-    constructor() {
-        this.items = [];
+class Monster {
+    constructor(monsterHP, monsterName) {
+        this.monsterHP = monsterHP;
+        this.monsterName = monsterName;
     }
-    addItem(item) {
-        this.items.push(item);
-    }
-    getItem(index) {
-        return this.items[index];
-    }
-    removeItem(index) {
-        this.items.splice(index, 1);
-    }
-    getAllItems() {
-        return this.items;
+    monsterDefeated() {
+        if (this.monsterHP === 0) {
+            console.log(`${this.monsterName}'s  HP is ${this.monsterHP}, ${this.monsterName} Defeated!`);
+        }
+        else {
+            console.log(`${this.monsterName} HP is ${this.monsterHP}`);
+        }
     }
 }
+const monster = new Monster(1, "Rabituzah");
+monster.monsterHP = 3;
+monster.monsterDefeated();
