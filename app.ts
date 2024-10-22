@@ -1,7 +1,16 @@
-type Coordinate = [number, number];
+//Union Type
 
-function compareCoords(p1: Coordinate, p2: Coordinate): Coordinate {
-  return [p1[0], p2[1]];
+type StringOrNumber = string | number | boolean;
+
+function acceptVal(val: StringOrNumber) {}
+
+//Intersection type
+
+interface BusinessPartner {
+  name: string;
 }
 
-console.log(compareCoords([2, 3], [4, 5]));
+interface ContactDetails {
+  email: string;
+  phone: string;
+}
