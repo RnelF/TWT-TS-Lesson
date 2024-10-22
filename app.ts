@@ -1,26 +1,7 @@
-class Monster<T, N> {
-  monsterName: N;
-  monsterHP: T;
+type Coordinate = [number, number];
 
-  constructor(monsterHP: T, monsterName: N) {
-    this.monsterHP = monsterHP;
-
-    this.monsterName = monsterName;
-  }
-
-  monsterDefeated(): void {
-    if (this.monsterHP === 0) {
-      console.log(
-        `${this.monsterName}'s  HP is ${this.monsterHP}, ${this.monsterName} Defeated!`
-      );
-    } else {
-      console.log(`${this.monsterName} HP is ${this.monsterHP}`);
-    }
-  }
+function compareCoords(p1: Coordinate, p2: Coordinate): Coordinate {
+  return [p1[0], p2[1]];
 }
 
-const monster = new Monster<number, string>(1, "Rabituzah");
-
-monster.monsterHP = 3;
-
-monster.monsterDefeated();
+console.log(compareCoords([2, 3], [4, 5]));

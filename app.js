@@ -1,18 +1,5 @@
 "use strict";
-class Monster {
-    constructor(monsterHP, monsterName) {
-        this.monsterHP = monsterHP;
-        this.monsterName = monsterName;
-    }
-    monsterDefeated() {
-        if (this.monsterHP === 0) {
-            console.log(`${this.monsterName}'s  HP is ${this.monsterHP}, ${this.monsterName} Defeated!`);
-        }
-        else {
-            console.log(`${this.monsterName} HP is ${this.monsterHP}`);
-        }
-    }
+function compareCoords(p1, p2) {
+    return [p1[0], p2[1]];
 }
-const monster = new Monster(1, "Rabituzah");
-monster.monsterHP = 3;
-monster.monsterDefeated();
+console.log(compareCoords([2, 3], [4, 5]));
