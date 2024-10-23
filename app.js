@@ -39,7 +39,7 @@ const handedCards = () => {
     const hand = [card1, card2];
     return hand;
 };
-const playerHand = handedCards();
+let playerHand = handedCards();
 console.log(playerHand);
 const playerHit = () => {
     const hitCard = deck[2];
@@ -47,3 +47,6 @@ const playerHit = () => {
 };
 playerHit();
 console.log(playerHand);
+const playerHandSum = () => {
+    for (let i = 0; i < playerHand.length; i++) { }
+};

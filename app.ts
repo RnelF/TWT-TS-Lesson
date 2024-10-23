@@ -46,7 +46,7 @@ const handedCards = (): string[] => {
   return hand;
 };
 
-const playerHand: string[] = handedCards();
+let playerHand: string[] = handedCards();
 
 console.log(playerHand);
 
@@ -58,3 +58,7 @@ const playerHit = (): void => {
 playerHit();
 
 console.log(playerHand);
+
+const playerHandSum = (): number => {
+  for (let i = 0; i < playerHand.length; i++) {}
+};
