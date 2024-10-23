@@ -1,16 +1,40 @@
-//Union Type
+const carValue: string[] = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K",
+];
 
-type StringOrNumber = string | number | boolean;
+const cardSuits: string[] = ["Heart", "Diamond", "Clove", "Spade"];
 
-function acceptVal(val: StringOrNumber) {}
+const createDeck = () => {
+  const deck: string[] = [];
+  for (let suit of cardSuits) {
+    for (let value of carValue) {
+      deck.push(`${value} of ${suit}`);
+    }
+  }
+  return deck;
+};
 
-//Intersection type
+const shuffleDeck = (deck: string[]) => {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap elements
+  }
+  return deck;
+};
 
-interface BusinessPartner {
-  name: string;
-}
+let deck = createDeck();
+deck = shuffleDeck(deck);
 
-interface ContactDetails {
-  email: string;
-  phone: string;
-}
+console.log(deck);
