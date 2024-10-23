@@ -37,4 +37,24 @@ const shuffleDeck = (deck: string[]) => {
 let deck = createDeck();
 deck = shuffleDeck(deck);
 
-console.log(deck);
+const handedCards = (): string[] => {
+  const card1: string = deck[0];
+  const card2: string = deck[1];
+
+  const hand: string[] = [card1, card2];
+
+  return hand;
+};
+
+const playerHand: string[] = handedCards();
+
+console.log(playerHand);
+
+const playerHit = (): void => {
+  const hitCard: string = deck[2];
+  playerHand.push(hitCard);
+};
+
+playerHit();
+
+console.log(playerHand);
