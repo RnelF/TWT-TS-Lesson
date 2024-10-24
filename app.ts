@@ -1,21 +1,46 @@
-interface Individual {
-  name: string;
-  birthday: Date;
-}
+type StringOrNumber = string | number;
 
-interface Organization {
-  companyName: string;
-  workPhone: string;
-}
-
-type ContactType = Individual | Organization;
-
-type CompContact = Individual & Organization;
-
-function addContact(contact: ContactType) {
-  if ("birthday" in contact) {
-    console.log(contact.name, contact.birthday);
+function add1(value: StringOrNumber): StringOrNumber {
+  if (typeof value === "string") {
+    return value + "1";
   } else {
-    console.log(contact.companyName, contact.workPhone);
+    return value + 1;
   }
 }
+
+console.log(add1("2"));
+
+/////////////////
+
+class Dog {
+  name: string;
+  color: string;
+  constructor(name: string, color: string) {
+    this.name = name;
+    this.color = color;
+  }
+}
+
+class Cat {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+}
+
+function getName(animal: Cat | Dog) {
+  if (animal instanceof Cat) {
+    console.log("The name of the Cat is ", animal.name);
+  } else {
+    console.log(
+      "The name of the Dog is ",
+      animal.name,
+      "and the color of it is ",
+      animal.color
+    );
+  }
+}
+
+const dog = new Dog("Nicolo", "Black");
+
+getName(dog);
