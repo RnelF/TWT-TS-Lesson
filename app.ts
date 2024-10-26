@@ -1,39 +1,40 @@
-type Log = Warning | Info | Success;
-
-interface Warning {
-  type: "warning";
-  msg: string;
+interface Square {
+  kind: "square";
+  sideLength: number;
 }
 
-interface Info {
-  type: "info";
-  text: string;
+interface Rectangle {
+  kind: "rectangle";
+  width: number;
+  height: number;
 }
 
-interface Success {
-  type: "success";
-  message: string;
+interface Circle {
+  kind: "circle";
+  radius: number;
 }
 
-function handleMsg(log: Log) {
-  switch (log.type) {
-    case "warning":
-      console.log(log.msg);
-      break;
+// Union type
+type Shape = Square | Rectangle | Circle;
 
-    case "info":
-      console.log(log.text);
-      break;
-
-    case "success":
-      console.log(log.message);
-      break;
+// Function that handles each shape
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case "square":
+      return shape.sideLength * shape.sideLength;
+    case "rectangle":
+      return shape.width * shape.height;
+    case "circle":
+      return Math.PI * shape.radius * shape.radius;
+    default:
+      // This ensures all cases are covered and throws an error for any future changes
+      const _exhaustiveCheck: never = shape;
+      return _exhaustiveCheck;
   }
 }
 
-const newInfo: Info = {
-  type: "info",
-  text: "Hello!!",
-};
+const mySquare: Square = { kind: "square", sideLength: 5 };
+console.log(getArea(mySquare)); // Output: 25
 
-handleMsg(newInfo);
+const myCircle: Circle = { kind: "circle", radius: 3 };
+console.log(getArea(myCircle)); // Output: 28.27...

@@ -1,19 +1,20 @@
 "use strict";
-function handleMsg(log) {
-    switch (log.type) {
-        case "warning":
-            console.log(log.msg);
-            break;
-        case "info":
-            console.log(log.text);
-            break;
-        case "success":
-            console.log(log.message);
-            break;
+// Function that handles each shape
+function getArea(shape) {
+    switch (shape.kind) {
+        case "square":
+            return shape.sideLength * shape.sideLength;
+        case "rectangle":
+            return shape.width * shape.height;
+        case "circle":
+            return Math.PI * shape.radius * shape.radius;
+        default:
+            // This ensures all cases are covered and throws an error for any future changes
+            const _exhaustiveCheck = shape;
+            return _exhaustiveCheck;
     }
 }
-const newInfo = {
-    type: "info",
-    text: "Hello!!",
-};
-handleMsg(newInfo);
+const mySquare = { kind: "square", sideLength: 5 };
+console.log(getArea(mySquare)); // Output: 25
+const myCircle = { kind: "circle", radius: 3 };
+console.log(getArea(myCircle)); // Output: 28.27...
