@@ -1,32 +1,16 @@
 "use strict";
-function add1(value) {
-    if (typeof value === "string") {
-        return value + "1";
+function Animal(animal) {
+    if ("specie" in animal) {
+        console.log(`The Birds name is ${animal.name} it's a ${animal.specie} specie that is endemic to ${animal.country} the birds color is ${animal.color}`);
     }
     else {
-        return value + 1;
+        console.log(`The Dog's name is ${animal.name} its a ${animal.breed} and its color is ${animal.color}`);
     }
 }
-console.log(add1("2"));
-/////////////////
-class Dog {
-    constructor(name, color) {
-        this.name = name;
-        this.color = color;
-    }
-}
-class Cat {
-    constructor(name) {
-        this.name = name;
-    }
-}
-function getName(animal) {
-    if (animal instanceof Cat) {
-        console.log("The name of the Cat is ", animal.name);
-    }
-    else {
-        console.log("The name of the Dog is ", animal.name, "and the color of it is ", animal.color);
-    }
-}
-const dog = new Dog("Nicolo", "Black");
-getName(dog);
+const bird = {
+    name: "Adarna",
+    specie: "Mythical",
+    color: "Rainbow",
+    country: "Biringan",
+};
+Animal(bird);
