@@ -1,13 +1,12 @@
-interface PageInfo {
+interface Todo {
+  id: number;
   title: string;
+  completed: boolean;
 }
 
-const pages: Record<string, PageInfo> = {
-  home: { title: "Home" },
-  about: { title: "About" },
-  contact: { title: "Contact" },
+type TodoPreview = Pick<Todo, "title" | "completed">;
+
+const todo: TodoPreview = {
+  title: "Wake UP!",
+  completed: false,
 };
-
-const homePage = pages.home;
-
-console.log(homePage.title);
