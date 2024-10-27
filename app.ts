@@ -1,40 +1,20 @@
-interface Square {
-  kind: "square";
-  sideLength: number;
+interface Todo {
+  title: string;
+  description: string;
 }
 
-interface Rectangle {
-  kind: "rectangle";
-  width: number;
-  height: number;
-}
+const newTodo: Todo = {
+  title: "Wake up!",
+  description: "You are dreaming",
+};
 
-interface Circle {
-  kind: "circle";
-  radius: number;
-}
-
-// Union type
-type Shape = Square | Rectangle | Circle;
-
-// Function that handles each shape
-function getArea(shape: Shape): number {
-  switch (shape.kind) {
-    case "square":
-      return shape.sideLength * shape.sideLength;
-    case "rectangle":
-      return shape.width * shape.height;
-    case "circle":
-      return Math.PI * shape.radius * shape.radius;
-    default:
-      // This ensures all cases are covered and throws an error for any future changes
-      const _exhaustiveCheck: never = shape;
-      return _exhaustiveCheck;
+const updateTodo = (todo: Partial<Todo>): void => {
+  if (todo.description) {
+    newTodo.description = todo.description;
+  } else if (todo.title) {
+    newTodo.title = todo.title;
   }
-}
+};
+updateTodo({ title: "Good Morning!" });
 
-const mySquare: Square = { kind: "square", sideLength: 5 };
-console.log(getArea(mySquare)); // Output: 25
-
-const myCircle: Circle = { kind: "circle", radius: 3 };
-console.log(getArea(myCircle)); // Output: 28.27...
+console.log(newTodo);
