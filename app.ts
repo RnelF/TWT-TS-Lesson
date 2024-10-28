@@ -1,87 +1,49 @@
 import promptSync from "prompt-sync";
 const prompt = promptSync();
 
+import shuffledDeck from "./cards/deck";
+
 function blackJack() {
   let playerName = prompt("Enter your Name: ");
   console.log(`Welcome to BlackJack game ${playerName}`);
 
   let balance: number = 100;
+  console.log(`Your balance is ${balance}`);
+
   let playAgain = true;
 
   let inputBet: unknown = prompt("Place your bet:");
 
-  let playerBet;
+  let playerBet: number;
 
   function gameBet(bet: number): void {
     if (!bet) {
       console.log("invalid input");
     } else {
       playerBet = bet;
-    }
 
-    return playerBet;
+      console.log(`Current Balance is ${balance - playerBet}`);
+    }
   }
 
-  console.log;
-  const carValue: string[] = [
-    "A",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K",
-  ];
-
-  const cardSuits: string[] = ["Heart", "Diamond", "Clove", "Spade"];
-
-  const createDeck = (): string[] => {
-    const deck: string[] = [];
-    for (let suit of cardSuits) {
-      for (let value of carValue) {
-        deck.push(`${value} of ${suit}`);
-      }
-    }
-    return deck;
-  };
-
-  const shuffleDeck = (deck: string[]): string[] => {
-    for (let i = deck.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]]; // Swap elements
-    }
-    return deck;
-  };
-
-  let deck = createDeck();
-
-  deck = shuffleDeck(deck);
-
   const handedCards = (): string[] => {
-    const card1: string = deck[0];
-    const card2: string = deck[1];
+    const card1: string = shuffledDeck[0];
+    const card2: string = shuffledDeck[1];
     const hand: string[] = [card1, card2];
     return hand;
   };
 
-  let playerHand: string[] = handedCards();
-
-  console.log(playerHand);
-
-  const playerHit = (): void => {
-    const hitCard: string = deck[2];
-    playerHand.push(hitCard);
+  const dealerCards = (): string[] => {
+    const card1: string = shuffledDeck[0];
+    const card2: string = shuffledDeck[1];
+    const hand: string[] = [card1, card2];
+    return hand;
   };
 
-  playerHit();
-
+  //PLAYER HAND
+  let playerHand: string[] = handedCards();
   console.log(playerHand);
+
   const playerHandSum = (): number => {
     let sum = 0;
     let aceCount = 0;
@@ -104,4 +66,20 @@ function blackJack() {
     return sum;
   };
   console.log(playerHandSum());
+
+  //DEALER HAND
+  let dealerHand: string[] = dealerCards();
+
+  console.log(`${dealerHand[0]} [hidden]`);
+
+  let action = prompt("Player Action (Hit/Stand");
+
+  const playerHit = (): void => {
+    const hitCard: string = shuffledDeck[2];
+    playerHand.push(hitCard);
+  };
+
+  playerHit();
 }
+
+blackJack();
