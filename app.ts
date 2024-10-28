@@ -1,3 +1,3 @@
-import { add, sub } from "./util";
+import Anything, { add, sub } from "./util";
 
-console.log(add(1, 3));
+console.log(Anything(), add(1, 3));

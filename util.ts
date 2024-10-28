@@ -6,4 +6,9 @@ function sub(x: number, y: number) {
   return x - y;
 }
 
+function test() {
+  return "test";
+}
+
 export { add, sub };
+export default test;
