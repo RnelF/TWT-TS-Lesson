@@ -1,3 +1,5 @@
-import Anything, { add, sub } from "./util";
+import complexFunc from "./math/complex/util";
 
-console.log(Anything(), add(1, 3));
+import simpleFunc from "./math/simple/utils";
+
+console.log(complexFunc());
