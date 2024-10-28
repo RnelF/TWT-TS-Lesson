@@ -1,14 +1,3 @@
-interface Todo {
-  id: number;
-  title: string;
-  description: string;
-  completed: boolean;
-}
+import { add, sub } from "./util";
 
-type TodoPreview = Omit<Todo, "id">;
-
-const todo: TodoPreview = {
-  title: "Clean room",
-  completed: false,
-  description: "clean all bed sheets!",
-};
+console.log(add(1, 3));
