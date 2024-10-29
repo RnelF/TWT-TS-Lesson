@@ -34,30 +34,46 @@ function blackJack() {
             deckIndex += cardsCount;
             return hand;
         };
+        //PLAYER HAND
+        let playerHand = dealHand(2);
+        console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+        //DEALER HAND
+        let dealerHand = dealHand(2);
+        console.log(`Dealers hand [${dealerHand[0]}, [hidden]]`);
         let action = prompt("Player Action (Hit/Stand):");
+        function playerHit() {
+            const hitCard = dealHand(1);
+            playerHand.push(hitCard[0]);
+            console.log(`You drew ${hitCard[0]}`);
+            console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+        }
+        while (action === "hit") {
+            playerHit();
+            action = prompt("Player Action (Hit/Stand):");
+        }
     }
-    const playerHandSum = () => {
+    //HAND SUM
+    function calculatedHandSum(hand) {
         let sum = 0;
         let aceCount = 0;
-        for (let card of playerHand) {
-            const value = card.split(" ")[0]; // Get the value part of the card
+        for (let card of hand) {
+            const value = card.split(" ")[0];
             if (value === "A") {
                 aceCount += 1;
-                sum += 11; // Count Aces as 11 initially
+                sum += 11;
             }
             else if (["J", "Q", "K"].includes(value)) {
-                sum += 10; // Face cards (J, Q, K) are worth 10
+                sum += 10;
             }
             else {
-                sum += parseInt(value); // Number cards are worth their face value
+                sum += parseInt(value);
             }
         }
-        // Adjust for Aces if the sum is over 21
         while (sum > 21 && aceCount > 0) {
             sum -= 10;
             aceCount -= 1;
         }
         return sum;
-    };
+    }
 }
 blackJack();
