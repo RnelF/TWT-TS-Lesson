@@ -12,74 +12,78 @@ function blackJack() {
 
   let playAgain = true;
 
-  let inputBet: unknown = prompt("Place your bet:");
+  let inputBet: any = prompt("Place your bet:");
 
-  let playerBet: number;
+  let bet = inputBet;
 
-  function gameBet(bet: number): void {
-    if (!bet) {
+  if (inputBet) {
+    gameBet();
+  }
+
+  function gameBet() {
+    if (inputBet === isNaN) {
       console.log("invalid input");
     } else {
-      playerBet = bet;
-
-      console.log(`Current Balance is ${balance - playerBet}`);
+      balance -= bet;
+      play();
     }
   }
 
-  const handedCards = (): string[] => {
-    const card1: string = shuffledDeck[0];
-    const card2: string = shuffledDeck[1];
-    const hand: string[] = [card1, card2];
-    return hand;
-  };
+  function play() {
+    console.log(`your current balance is ${balance}`);
+    const handedCards = (): string[] => {
+      const card1: string = shuffledDeck[0];
+      const card2: string = shuffledDeck[1];
+      const hand: string[] = [card1, card2];
+      return hand;
+    };
 
-  const dealerCards = (): string[] => {
-    const card1: string = shuffledDeck[0];
-    const card2: string = shuffledDeck[1];
-    const hand: string[] = [card1, card2];
-    return hand;
-  };
+    const dealerCards = (): string[] => {
+      const card1: string = shuffledDeck[0];
+      const card2: string = shuffledDeck[1];
+      const hand: string[] = [card1, card2];
+      return hand;
+    };
 
-  //PLAYER HAND
-  let playerHand: string[] = handedCards();
-  console.log(playerHand);
+    //PLAYER HAND
+    let playerHand: string[] = handedCards();
 
-  const playerHandSum = (): number => {
-    let sum = 0;
-    let aceCount = 0;
-    for (let card of playerHand) {
-      const value = card.split(" ")[0]; // Get the value part of the card
-      if (value === "A") {
-        aceCount += 1;
-        sum += 11; // Count Aces as 11 initially
-      } else if (["J", "Q", "K"].includes(value)) {
-        sum += 10; // Face cards (J, Q, K) are worth 10
-      } else {
-        sum += parseInt(value); // Number cards are worth their face value
+    const playerHandSum = (): number => {
+      let sum = 0;
+      let aceCount = 0;
+      for (let card of playerHand) {
+        const value = card.split(" ")[0]; // Get the value part of the card
+        if (value === "A") {
+          aceCount += 1;
+          sum += 11; // Count Aces as 11 initially
+        } else if (["J", "Q", "K"].includes(value)) {
+          sum += 10; // Face cards (J, Q, K) are worth 10
+        } else {
+          sum += parseInt(value); // Number cards are worth their face value
+        }
       }
-    }
-    // Adjust for Aces if the sum is over 21
-    while (sum > 21 && aceCount > 0) {
-      sum -= 10;
-      aceCount -= 1;
-    }
-    return sum;
-  };
-  console.log(playerHandSum());
+      // Adjust for Aces if the sum is over 21
+      while (sum > 21 && aceCount > 0) {
+        sum -= 10;
+        aceCount -= 1;
+      }
+      return sum;
+    };
 
-  //DEALER HAND
-  let dealerHand: string[] = dealerCards();
+    console.log(`Your hand [${playerHand}] Total: ${playerHandSum()}`);
 
-  console.log(`${dealerHand[0]} [hidden]`);
+    //DEALER HAND
+    let dealerHand: string[] = dealerCards();
 
-  let action = prompt("Player Action (Hit/Stand");
+    console.log(`Dealers hand [${dealerHand[0]}, [hidden]]`);
 
-  const playerHit = (): void => {
-    const hitCard: string = shuffledDeck[2];
-    playerHand.push(hitCard);
-  };
+    let action = prompt("Player Action (Hit/Stand: ");
 
-  playerHit();
+    const playerHit = (): void => {
+      const hitCard: string = shuffledDeck[2];
+      playerHand.push(hitCard);
+    };
+  }
 }
 
 blackJack();
