@@ -34,9 +34,26 @@ function blackJack() {
             deckIndex += cardsCount;
             return hand;
         };
+        function fight() {
+            let playerWin = bet + bet;
+            if (playerHand > dealerHand) {
+                console.log(`You win! `);
+                balance += playerWin;
+            }
+            else if (playerHand < dealerHand) {
+                console.log(`You lose!! Current balance is ${balance}`);
+            }
+        }
         //PLAYER HAND
         let playerHand = dealHand(2);
-        console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+        if (calculatedHandSum(playerHand) === 21) {
+            const blackJackWin = bet * 1.5;
+            balance += blackJackWin;
+            console.log(`BlackJack!! you win ${blackJackWin}`);
+        }
+        else {
+            console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+        }
         //DEALER HAND
         let dealerHand = dealHand(2);
         console.log(`Dealers hand [${dealerHand[0]}, [hidden]]`);
@@ -46,10 +63,16 @@ function blackJack() {
             playerHand.push(hitCard[0]);
             console.log(`You drew ${hitCard[0]}`);
             console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+            if (calculatedHandSum(playerHand) > 21) {
+                console.log(`You've got Busted!!`);
+            }
         }
-        while (action === "hit") {
+        if (action === "hit") {
             playerHit();
             action = prompt("Player Action (Hit/Stand):");
+        }
+        else {
+            fight();
         }
     }
     //HAND SUM
