@@ -8,74 +8,93 @@ const prompt = (0, prompt_sync_1.default)();
 const deck_1 = __importDefault(require("./cards/deck"));
 function blackJack() {
     let playerName = prompt("Enter your Name: ");
-    console.log(`Welcome to BlackJack game ${playerName}`);
+    console.log(`Welcome to BlackJack, ${playerName}`);
     let balance = 100;
-    console.log(`Your balance is ${balance}`);
+    console.log(`Your starting balance is ${balance}`);
     let playAgain = true;
-    let inputBet = prompt("Place your bet:");
-    let bet = inputBet;
-    if (inputBet) {
-        gameBet();
-    }
-    function gameBet() {
-        if (inputBet === isNaN) {
-            console.log("invalid input");
+    while (playAgain && balance > 0) {
+        let inputBet = parseInt(prompt("Place your bet: "));
+        if (isNaN(inputBet) || inputBet <= 0 || inputBet > balance) {
+            console.log("Invalid bet amount. Try again.");
+            continue;
         }
-        else {
-            balance -= bet;
-            console.log(`your current balance is ${balance}`);
-            play();
-        }
+        let bet = inputBet;
+        balance -= bet;
+        console.log(`Your current balance after bet: ${balance}`);
+        play(bet);
+        playAgain =
+            prompt("Do you want to play again? (yes/no): ").toLowerCase() === "yes";
     }
-    function play() {
+    if (balance <= 0) {
+        console.log("Game over! You've run out of money.");
+    }
+    else {
+        console.log(`Thanks for playing, ${playerName}! Your final balance is ${balance}`);
+    }
+    function play(bet) {
         let deckIndex = 0;
         const dealHand = (cardsCount) => {
             const hand = deck_1.default.slice(deckIndex, deckIndex + cardsCount);
             deckIndex += cardsCount;
             return hand;
         };
-        function fight() {
-            let playerWin = bet + bet;
-            if (playerHand > dealerHand) {
-                console.log(`You win! `);
-                balance += playerWin;
+        function fight(playerHand, dealerHand) {
+            const playerSum = calculatedHandSum(playerHand);
+            const dealerSum = calculatedHandSum(dealerHand);
+            console.log(`Dealer's final hand: [${dealerHand}] Total: ${dealerSum}`);
+            console.log(`Your final hand: [${playerHand}] Total: ${playerSum}`);
+            if (playerSum > 21) {
+                console.log("You busted! Dealer wins.");
             }
-            else if (playerHand < dealerHand) {
-                console.log(`You lose!! Current balance is ${balance}`);
+            else if (dealerSum > 21 || playerSum > dealerSum) {
+                console.log("You win!");
+                balance += bet * 2;
             }
+            else if (playerSum < dealerSum) {
+                console.log("Dealer wins!");
+            }
+            else {
+                console.log("It's a tie! Bet returned.");
+                balance += bet;
+            }
+            console.log(`Your current balance: ${balance}`);
         }
-        //PLAYER HAND
+        // Deal initial hands
         let playerHand = dealHand(2);
+        let dealerHand = dealHand(2);
         if (calculatedHandSum(playerHand) === 21) {
-            const blackJackWin = bet * 1.5;
+            const blackJackWin = bet * 2.5;
             balance += blackJackWin;
-            console.log(`BlackJack!! you win ${blackJackWin}`);
+            console.log(`BlackJack! You win ${blackJackWin}`);
+            return;
         }
         else {
             console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
+            console.log(`Dealer's hand [${dealerHand[0]}, [hidden]]`);
         }
-        //DEALER HAND
-        let dealerHand = dealHand(2);
-        console.log(`Dealers hand [${dealerHand[0]}, [hidden]]`);
-        let action = prompt("Player Action (Hit/Stand):");
-        function playerHit() {
-            const hitCard = dealHand(1);
-            playerHand.push(hitCard[0]);
-            console.log(`You drew ${hitCard[0]}`);
+        // Player action loop
+        let action = prompt("Player Action (hit/stand): ").toLowerCase();
+        while (action === "hit") {
+            const hitCard = dealHand(1)[0];
+            playerHand.push(hitCard);
+            console.log(`You drew ${hitCard}`);
             console.log(`Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`);
             if (calculatedHandSum(playerHand) > 21) {
-                console.log(`You've got Busted!!`);
+                console.log("You've busted!");
+                return;
             }
+            action = prompt("Player Action (hit/stand): ").toLowerCase();
         }
-        if (action === "hit") {
-            playerHit();
-            action = prompt("Player Action (Hit/Stand):");
+        // Dealer's turn
+        while (calculatedHandSum(dealerHand) < 17) {
+            const dealerCard = dealHand(1)[0];
+            dealerHand.push(dealerCard);
+            console.log(`Dealer draws ${dealerCard}`);
         }
-        else {
-            fight();
-        }
+        // Resolve game
+        fight(playerHand, dealerHand);
     }
-    //HAND SUM
+    // Calculate hand sum function
     function calculatedHandSum(hand) {
         let sum = 0;
         let aceCount = 0;
