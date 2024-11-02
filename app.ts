@@ -39,6 +39,34 @@ function blackJack() {
 
     function fight(playerHand: string[], dealerHand: string[]) {
       const playerSum = calculatedHandSum(playerHand);
+      const dealerSum = calculatedHandSum(dealerHand);
+
+      console.log(`Dealer's final hand: [${playerHand}] Total: ${dealerSum}`);
+      console.log(`Your final hand: [${playerHand}] Total: ${playerSum}`);
     }
+  }
+
+  function calculatedHandSum(hand: string[]): number {
+    let sum = 0;
+    let aceCount = 0;
+    for (let card of hand) {
+      const value = card.split(" ")[0];
+
+      if (value === "A") {
+        aceCount += 1;
+        sum += 11;
+      } else if (["J", "Q", "K"].includes(value)) {
+        sum += 10;
+      } else {
+        sum += parseInt(value);
+      }
+    }
+
+    while (sum > 21 && aceCount > 0) {
+      sum -= 10;
+      aceCount -= 1;
+    }
+
+    return sum;
   }
 }
