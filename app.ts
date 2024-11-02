@@ -25,7 +25,9 @@ function blackJack() {
     balance -= inputBet;
     console.log(`Your current balance after bet: ${balance}`);
 
-    playAgain(inputBet);
+    play(inputBet);
+    playAgain =
+      prompt("Do you want to play again? (yes/no): ").toLowerCase() === "yes";
   }
 
   function play(bet: number) {
@@ -43,7 +45,64 @@ function blackJack() {
 
       console.log(`Dealer's final hand: [${playerHand}] Total: ${dealerSum}`);
       console.log(`Your final hand: [${playerHand}] Total: ${playerSum}`);
+
+      if (playerSum > 21) {
+        console.log("You busted Dealer wins.");
+      } else if (dealerSum > 21 || playerSum > dealerSum) {
+        console.log("You win!");
+        balance += bet * 2;
+      } else if (playerSum < dealerSum) {
+        console.log("Dealer wins!");
+      } else {
+        console.log("It's a tie! Bet returned.");
+        balance += bet;
+      }
+      console.log(`Your current balance: ${balance}`);
     }
+
+    //Deal initial hands
+    let playerHand: string[] = dealHand(2);
+    let dealerHand: string[] = dealHand(2);
+
+    if (calculatedHandSum(playerHand) === 21) {
+      const blackJackWin: number = bet * 2.5;
+      console.log(`BlackJack! You win ${blackJackWin}`);
+      return;
+    } else {
+      console.log(
+        `Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`
+      );
+      console.log(`Dealer's hand [${dealerHand[0]}, [hidden]]`);
+    }
+
+    //player action loop
+    let action: playerAction = prompt(
+      "Player Action: (hit/stand): "
+    ).toLocaleLowerCase() as playerAction;
+
+    while (action === "hit") {
+      const hitCard: string = dealHand(1)[0];
+      playerHand.push(hitCard);
+      console.log(`You drew ${hitCard}`);
+      console.log(
+        `Your hand [${playerHand}] Total: ${calculatedHandSum(playerHand)}`
+      );
+
+      action = prompt(
+        "player Action (hit/stand): "
+      ).toLowerCase() as playerAction;
+    }
+
+    //Dealer's turn
+
+    while (calculatedHandSum(dealerHand) < 17) {
+      const dealerHitCard: string = dealHand(1)[0];
+      dealerHand.push(dealerHitCard);
+      console.log(`Dealer draws ${dealerHitCard}`);
+    }
+
+    //Resolve Game
+    fight(playerHand, dealerHand);
   }
 
   function calculatedHandSum(hand: string[]): number {
@@ -70,3 +129,5 @@ function blackJack() {
     return sum;
   }
 }
+
+blackJack();
